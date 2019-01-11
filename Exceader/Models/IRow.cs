@@ -2,10 +2,9 @@
 
 namespace Exceader.Models
 {
-    public interface IRow : IReadOnlyList<ICell>
+    public interface IRow
     {
         ISheet Sheet { get; }
-        bool IsEmpty { get; }
-        int Index { get; }
+        ICell this[int index] { get; }
     }
 }

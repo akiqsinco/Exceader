@@ -4,8 +4,8 @@
     {
         IRow Row { get; }
         string Value { get; }
-        bool IsEmpty { get; }
-        int Index { get; }
+        int RowIndex { get; }
+        int ColumnIndex { get; }
         string Id { get; }
     }
 }

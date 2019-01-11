@@ -6,16 +6,16 @@ namespace Exceader.Models
 {
     public class Cell : ICell
     {
-        public static readonly ICell Empty = new Cell();
-
         public IRow Row => throw new NotImplementedException();
 
         public string Value => throw new NotImplementedException();
 
-        public bool IsEmpty => string.IsNullOrEmpty(Value);
+        public int RowIndex => throw new NotImplementedException();
 
-        public int Index => throw new NotImplementedException();
+        public int ColumnIndex => throw new NotImplementedException();
 
         public string Id => throw new NotImplementedException();
+
+        public override string ToString() => throw new NotImplementedException();
     }
 }

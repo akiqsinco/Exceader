@@ -1,21 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml;
 
 namespace Exceader.Models
 {
     public class Cell : ICell
     {
-        public IRow Row => throw new NotImplementedException();
+        public IRow Row { get; }
 
-        public string Value => throw new NotImplementedException();
+        public string Value { get; }
 
-        public int RowIndex => throw new NotImplementedException();
+        public int Index { get; }
 
-        public int ColumnIndex => throw new NotImplementedException();
+        public string Id => new CellPosition(Row.Index, Index).ToId();
 
-        public string Id => throw new NotImplementedException();
+        internal Cell(IRow row, int index)
+        {
+            Row = row;
+            Value = string.Empty;
+            Index = index;
+        }
 
-        public override string ToString() => throw new NotImplementedException();
+        internal Cell(IRow row, int index, XmlElement cellElement, IReadOnlyList<string> sharedStrings)
+        {
+            Row = row;
+            Value = GetCellValue(cellElement, sharedStrings);
+            Index = index;
+        }
+
+        private string GetCellValue(XmlElement cellElement, IReadOnlyList<string> sharedStrings)
+        {
+            var value = cellElement.InnerText;
+            var type = cellElement.GetAttribute("t");
+            if (type == null || type != "s")
+            {
+                return value;
+            }
+
+            if (!int.TryParse(value, out var refIndex))
+            {
+                return string.Empty;
+            }
+
+            if (refIndex < 0 || sharedStrings.Count <= refIndex)
+            {
+                return string.Empty;
+            }
+
+            return sharedStrings[refIndex];
+        }
+
+        public override string ToString() => Value;
     }
 }

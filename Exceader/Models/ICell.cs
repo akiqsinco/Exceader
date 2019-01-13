@@ -4,8 +4,7 @@
     {
         IRow Row { get; }
         string Value { get; }
-        int RowIndex { get; }
-        int ColumnIndex { get; }
+        int Index { get; }
         string Id { get; }
     }
 }

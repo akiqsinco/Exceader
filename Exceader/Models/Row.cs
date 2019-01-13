@@ -1,15 +1,61 @@
 ﻿using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml;
 
 namespace Exceader.Models
 {
     public class Row : IRow
     {
-        public ICell this[int index] => throw new NotImplementedException();
+        private readonly IReadOnlyDictionary<int, ICell> _cells;
 
-        public ISheet Sheet => throw new NotImplementedException();
+        public ICell this[int index]
+        {
+            get
+            {
+                if (index < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                }
+
+                if (_cells.ContainsKey(index))
+                {
+                    return _cells[index];
+                }
+
+                return new Cell(this, index);
+            }
+        }
+
+        public ISheet Sheet { get; }
+
+        public int Index { get; }
+
+        internal Row(ISheet sheet, int index)
+        {
+            Sheet = sheet;
+            Index = index;
+            _cells = new Dictionary<int, ICell>();
+        }
+
+        internal Row(ISheet sheet, int index, XmlElement rowElement, IReadOnlyList<string> sharedStrings)
+        {
+            Sheet = sheet;
+            Index = index;
+            _cells = CreateCells(rowElement, sharedStrings);
+        }
+
+        private Dictionary<int, ICell> CreateCells(XmlElement rowElement, IReadOnlyList<string> sharedStrings)
+        {
+            var cells = new Dictionary<int, ICell>();
+
+            foreach (XmlElement c in rowElement.GetElementsByTagName("c"))
+            {
+                var pos = CellPosition.Parse(c.GetAttribute("r"));
+
+                cells[pos.Column] = new Cell(this, pos.Column, c, sharedStrings);
+            }
+
+            return cells;
+        }
     }
 }

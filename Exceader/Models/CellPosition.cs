@@ -9,7 +9,7 @@ namespace Exceader.Models
 
         public static CellPosition Parse(string id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -19,7 +19,7 @@ namespace Exceader.Models
 
         public static bool TryParse(string id, out CellPosition position)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }

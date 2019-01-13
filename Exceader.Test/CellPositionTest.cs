@@ -63,6 +63,18 @@ namespace Exceader.Test
         }
 
         [Test]
+        public void ParseEmptyStringToPosition()
+        {
+            Assert.That(() => CellPosition.Parse(string.Empty), Throws.Exception.TypeOf<FormatException>());
+        }
+
+        [Test]
+        public void ParseNullToPosition()
+        {
+            Assert.That(() => CellPosition.Parse(null), Throws.ArgumentNullException);
+        }
+
+        [Test]
         public void ConvertMinimumPositionToId()
         {
             var position = new CellPosition(0, 0);

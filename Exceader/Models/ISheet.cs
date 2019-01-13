@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Exceader.Models
+﻿namespace Exceader.Models
 {
     public interface ISheet
     {

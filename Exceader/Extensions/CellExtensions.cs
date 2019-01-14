@@ -16,6 +16,16 @@ namespace Exceader.Extensions
             return int.TryParse(cell.Value, out var value) ? value : default(int?);
         }
 
+        public static float? AsFloat(this ICell cell)
+        {
+            if (cell == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return float.TryParse(cell.Value, out var value) ? value : default(float?);
+        }
+
         public static double? AsDouble(this ICell cell)
         {
             if (cell == null)

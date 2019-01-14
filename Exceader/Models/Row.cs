@@ -7,8 +7,6 @@ namespace Exceader.Models
 {
     public class Row : IRow
     {
-        public static readonly int MaxLength = 16384;
-
         private readonly IReadOnlyDictionary<int, ICell> _cells;
 
         public ICell this[int index]

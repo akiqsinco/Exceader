@@ -16,4 +16,13 @@
     <ProjectReference Include="..\Exceader\Exceader.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="data\exception.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="data\normal.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

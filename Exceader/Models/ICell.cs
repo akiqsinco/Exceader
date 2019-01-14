@@ -6,5 +6,6 @@
         string Value { get; }
         int Index { get; }
         string Id { get; }
+        bool IsEmpty { get; }
     }
 }

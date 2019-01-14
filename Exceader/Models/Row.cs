@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Linq;
 
 namespace Exceader.Models
 {
@@ -29,6 +30,8 @@ namespace Exceader.Models
         public ISheet Sheet { get; }
 
         public int Index { get; }
+
+        public bool IsEmpty => _cells.Values.All(cell => cell.IsEmpty);
 
         internal Row(ISheet sheet, int index)
         {

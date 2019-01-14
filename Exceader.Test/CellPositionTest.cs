@@ -7,87 +7,75 @@ namespace Exceader.Test
     public class CellPositionTest
     {
         [Test]
-        public void ParseMinimumIdToPosition()
+        [TestCase("A1", 0, 0)]
+        [TestCase("XFD1048576", 1048575, 16383)]
+        public void ParseValidId(string id, int expectedRow, int expectedColumn)
         {
-            var success = CellPosition.TryParse("A1", out var position);
+            var position = CellPosition.Parse(id);
 
-            Assert.That(success);
-            Assert.That(position.Row, Is.EqualTo(0));
-            Assert.That(position.Column, Is.EqualTo(0));
+            Assert.That(position.Row, Is.EqualTo(expectedRow));
+            Assert.That(position.Column, Is.EqualTo(expectedColumn));
         }
 
         [Test]
-        public void ParseCommonIdToPosition()
+        [TestCase("12345")]
+        [TestCase("ABC")]
+        [TestCase("A0")]
+        [TestCase("@1")]
+        [TestCase("_")]
+        [TestCase("")]
+        public void ParseInvalidId(string id)
         {
-            var success = CellPosition.TryParse("XFD1048576", out var position);
-
-            Assert.That(success);
-            Assert.That(position.Row, Is.EqualTo(1048575));
-            Assert.That(position.Column, Is.EqualTo(16383));
+            Assert.That(() => CellPosition.Parse(id), Throws.Exception.TypeOf<FormatException>());
         }
 
         [Test]
-        public void ParseRowOnlyIdToPosition()
-        {
-            var success = CellPosition.TryParse("12345", out var position);
-
-            Assert.That(!success);
-            Assert.That(position, Is.EqualTo(default(CellPosition)));
-        }
-
-        [Test]
-        public void ParseColumnOnlyIdToPosition()
-        {
-            var success = CellPosition.TryParse("ABC", out var position);
-
-            Assert.That(!success);
-            Assert.That(position, Is.EqualTo(default(CellPosition)));
-        }
-
-        [Test]
-        public void ParseOutOfRangeRowToPosition()
-        {
-            var success = CellPosition.TryParse("A0", out var position);
-
-            Assert.That(!success);
-            Assert.That(position, Is.EqualTo(default(CellPosition)));
-        }
-
-        [Test]
-        public void ParseOutOfRangeColumnToPosition()
-        {
-            var success = CellPosition.TryParse("_0", out var position);
-
-            Assert.That(!success);
-            Assert.That(position, Is.EqualTo(default(CellPosition)));
-        }
-
-        [Test]
-        public void ParseEmptyStringToPosition()
-        {
-            Assert.That(() => CellPosition.Parse(string.Empty), Throws.Exception.TypeOf<FormatException>());
-        }
-
-        [Test]
-        public void ParseNullToPosition()
+        public void ParseNullId()
         {
             Assert.That(() => CellPosition.Parse(null), Throws.ArgumentNullException);
         }
 
         [Test]
-        public void ConvertMinimumPositionToId()
+        [TestCase("A1", 0, 0)]
+        [TestCase("XFD1048576", 1048575, 16383)]
+        public void TryParseValidId(string id, int expectedRow, int expectedColumn)
         {
-            var position = new CellPosition(0, 0);
+            var success = CellPosition.TryParse(id, out var position);
 
-            Assert.That(position.ToId(), Is.EqualTo("A1"));
+            Assert.That(success);
+            Assert.That(position.Row, Is.EqualTo(expectedRow));
+            Assert.That(position.Column, Is.EqualTo(expectedColumn));
         }
 
         [Test]
-        public void ConvertCommonPositionToId()
+        [TestCase("12345")]
+        [TestCase("ABC")]
+        [TestCase("A0")]
+        [TestCase("@1")]
+        [TestCase("_")]
+        [TestCase("")]
+        public void TryParseInvalidId(string id)
         {
-            var position = new CellPosition(1048575, 16383);
+            var success = CellPosition.TryParse(id, out var position);
 
-            Assert.That(position.ToId(), Is.EqualTo("XFD1048576"));
+            Assert.That(!success);
+            Assert.That(position, Is.EqualTo(default(CellPosition)));
+        }
+
+        [Test]
+        public void TryParseNullId()
+        {
+            Assert.That(() => CellPosition.TryParse(null, out var pos), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        [TestCase(0, 0, "A1")]
+        [TestCase(1048575, 16383, "XFD1048576")]
+        public void ConvertToId(int row, int column, string expectedId)
+        {
+            var position = new CellPosition(row, column);
+
+            Assert.That(position.ToId(), Is.EqualTo(expectedId));
         }
 
         [Test]
@@ -99,15 +87,12 @@ namespace Exceader.Test
         }
 
         [Test]
-        public void InstanciateWithOutOrRangeRow()
+        [TestCase(-1, 0)]
+        [TestCase(0, -1)]
+        [TestCase(-1, -1)]
+        public void InstanciateWithInvalidIndex(int row, int column)
         {
-            Assert.That(() => new CellPosition(-1, 0), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
-        }
-
-        [Test]
-        public void InstanciateWithOutOrRangeColumn()
-        {
-            Assert.That(() => new CellPosition(0, -1), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => new CellPosition(row, column), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
         }
     }
 }

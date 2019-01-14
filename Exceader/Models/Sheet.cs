@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Linq;
 
 namespace Exceader.Models
 {
@@ -44,13 +45,18 @@ namespace Exceader.Models
             }
         }
 
-        public ICell this[int row, int column] => this[row, column];
+        public ICell this[int row, int column] => this[row][column];
 
         public IBook Book { get; }
 
-        internal Sheet(IBook book, XmlElement sheetElement, IReadOnlyList<string> sharedStrings)
+        public bool IsEmpty => _rows.Values.All(row => row.IsEmpty);
+
+        public string Name { get; }
+
+        internal Sheet(IBook book, string name, XmlElement sheetElement, IReadOnlyList<string> sharedStrings)
         {
             Book = book;
+            Name = name;
             _rows = CreateRows(sheetElement, sharedStrings);
         }
 

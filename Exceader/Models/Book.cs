@@ -25,9 +25,14 @@ namespace Exceader.Models
         {
             get
             {
+                if (sheetName == null)
+                {
+                    throw new ArgumentNullException(nameof(sheetName));
+                }
+
                 if (!_sheetEntryNames.ContainsKey(sheetName))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(sheetName));
+                    throw new KeyNotFoundException();
                 }
 
                 if (!_sheets.ContainsKey(sheetName))
@@ -60,9 +65,9 @@ namespace Exceader.Models
 
         public static IBook Open(string path)
         {
-            if (string.IsNullOrEmpty(path))
+            if (path == null)
             {
-                throw new ArgumentException(nameof(path));
+                throw new ArgumentNullException(nameof(path));
             }
 
             if (!File.Exists(path))
@@ -168,7 +173,7 @@ namespace Exceader.Models
                 var xml = new XmlDocument();
                 xml.Load(stream);
 
-                return new Sheet(this, xml.DocumentElement, _sharedStrings);
+                return new Sheet(this, sheetName, xml.DocumentElement, _sharedStrings);
             }
         }
     }

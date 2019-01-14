@@ -5,5 +5,6 @@
         ISheet Sheet { get; }
         ICell this[int index] { get; }
         int Index { get; }
+        bool IsEmpty { get; }
     }
 }

@@ -24,7 +24,7 @@ using (var book = Book.Open("/path/to/excel file"))
     var b2 = sheet[1, 1].Value;
     var c3 = sheet[2][2].Value;
 
-    // get a value as other types
+    // Get a value as other types
     var intVal = sheet["AC12"].AsInteger();
     var doubleVal = sheet["AC12"].AsDouble();
     var dateTimeVal = sheet["AC12"].AsDateTime();

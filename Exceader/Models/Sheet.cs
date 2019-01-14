@@ -7,6 +7,8 @@ namespace Exceader.Models
 {
     public class Sheet : ISheet
     {
+        public static readonly int MaxLength = 1048576;
+
         private readonly IReadOnlyDictionary<int, IRow> _rows;
 
         public IRow this[int index]

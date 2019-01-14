@@ -1,4 +1,6 @@
 # Exceader
+![NuGet status](https://img.shields.io/badge/NuGet-Not%20available-red.svg)
+
 Exceader is a lightweight Excel data reader.  
 
 Features:

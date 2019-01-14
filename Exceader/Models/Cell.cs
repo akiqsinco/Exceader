@@ -6,30 +6,28 @@ namespace Exceader.Models
 {
     public class Cell : ICell
     {
-        private CellPosition _position;
-
         public IRow Row { get; }
 
         public string Value { get; }
 
-        public int Index => _position.Column;
-
-        public string Id => _position.ToId();
+        public int Index { get; }
 
         public bool IsEmpty => string.IsNullOrEmpty(Value);
+
+        public string Id => new CellPosition(Row.Index, Index).ToId();
 
         internal Cell(IRow row, int index)
         {
             Row = row;
             Value = string.Empty;
-            _position = new CellPosition(row.Index, index);
+            Index = index;
         }
 
         internal Cell(IRow row, int index, XmlElement cellElement, IReadOnlyList<string> sharedStrings)
         {
             Row = row;
             Value = GetCellValue(cellElement, sharedStrings);
-            _position = new CellPosition(row.Index, index);
+            Index = index;
         }
 
         private string GetCellValue(XmlElement cellElement, IReadOnlyList<string> sharedStrings)

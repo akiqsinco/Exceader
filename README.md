@@ -42,7 +42,10 @@ using (var book = Book.Open("/path/to/excel file"))
 ```
 
 ## Author
-- [@akiqsinco](https://twitter.com/akiqsinco) (<akiqsinco@gmail.com>)
+- akiqsinco (<akiqsinco@gmail.com>)
+
+## Copyright
+Copyright (c) 2019 akiqsinco (<akiqsinco@gmail.com>)
 
 ## License
 This software is released under the MIT License, see LICENSE.txt.

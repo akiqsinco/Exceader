@@ -14,7 +14,7 @@ namespace Exceader.Extensions
                 throw new ArgumentNullException(nameof(sheet));
             }
 
-            if (from < to)
+            if (to < from)
             {
                 throw new InvalidOperationException();
             }

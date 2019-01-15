@@ -14,7 +14,7 @@ namespace Exceader.Extensions
                 throw new ArgumentNullException(nameof(row));
             }
 
-            if (from < to)
+            if (to < from)
             {
                 throw new InvalidOperationException();
             }

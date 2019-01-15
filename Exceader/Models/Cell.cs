@@ -32,7 +32,12 @@ namespace Exceader.Models
 
         private string GetCellValue(XmlElement cellElement, IReadOnlyList<string> sharedStrings)
         {
-            var value = cellElement["v"].InnerText;
+            var value = cellElement["v"]?.InnerText;
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
             var type = cellElement.GetAttribute("t");
             if (type == null || type != "s")
             {

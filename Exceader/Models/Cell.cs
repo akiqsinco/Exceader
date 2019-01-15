@@ -13,9 +13,11 @@ namespace Exceader.Models
 
         public int Index { get; }
 
-        public bool IsEmpty => string.IsNullOrEmpty(Value);
+        public string ColumnName => ExcelNumber.ToAlphabetical(Index);
 
         public string Id => ExcelNumber.ToId(Row.Index, Index);
+
+        public bool IsEmpty => string.IsNullOrEmpty(Value);
 
         internal Cell(IRow row, int index)
         {

@@ -48,6 +48,42 @@ namespace Exceader.Test
         }
 
         [Test]
+        [TestCase("A")]
+        [TestCase("XFD")]
+        public void GetCellByValidColumnName(string columnName)
+        {
+            using (var book = Book.Open(BookTest.NormalData))
+            {
+                var row = book["TestSheet1"][0];
+
+                Assert.That(row[columnName], Is.Not.Null);
+                Assert.That(row[columnName].ColumnName, Is.EqualTo(columnName));
+            }
+        }
+
+        [Test]
+        public void GetCellByInvalidColumnName()
+        {
+            using (var book = Book.Open(BookTest.NormalData))
+            {
+                var row = book["TestSheet1"][0];
+
+                Assert.That(() => row["@"], Throws.Exception.TypeOf<FormatException>());
+            }
+        }
+
+        [Test]
+        public void GetCellByNullColumnName()
+        {
+            using (var book = Book.Open(BookTest.NormalData))
+            {
+                var row = book["TestSheet1"][0];
+
+                Assert.That(() => row[null], Throws.ArgumentNullException);
+            }
+        }
+
+        [Test]
         public void CheckRowIsEmpty()
         {
             using (var book = Book.Open(BookTest.NormalData))

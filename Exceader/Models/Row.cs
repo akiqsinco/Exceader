@@ -28,6 +28,20 @@ namespace Exceader.Models
             }
         }
 
+        public ICell this[string columnName]
+        {
+            get
+            {
+                if (columnName == null)
+                {
+                    throw new ArgumentNullException(nameof(columnName));
+                }
+
+                var index = ExcelNumber.ToNumerical(columnName);
+                return this[index];
+            }
+        }
+
         public ISheet Sheet { get; }
 
         public int Index { get; }

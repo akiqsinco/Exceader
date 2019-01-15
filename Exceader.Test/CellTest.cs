@@ -49,17 +49,28 @@ namespace Exceader.Test
         }
 
         [Test]
-        [TestCase(0, 0)]
-        [TestCase(10, 10)]
-        public void GetCellId(int row, int column)
+        [TestCase("A1")]
+        [TestCase("XFD1048576")]
+        public void GetCellId(string id)
         {
-            var id = ExcelNumber.ToId(row, column);
-
             using (var book = Book.Open(BookTest.NormalData))
             {
                 var sheet = book["TestSheet1"];
 
-                Assert.That(sheet[row, column].Id, Is.EqualTo(id));
+                Assert.That(sheet[id].Id, Is.EqualTo(id));
+            }
+        }
+
+        [Test]
+        [TestCase("A")]
+        [TestCase("XFD")]
+        public void GetColumnName(string columnName)
+        {
+            using (var book = Book.Open(BookTest.NormalData))
+            {
+                var row = book["TestSheet1"][0];
+
+                Assert.That(row[columnName].ColumnName, Is.EqualTo(columnName));
             }
         }
     }

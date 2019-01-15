@@ -29,10 +29,10 @@ namespace Exceader.Test
         {
             using (var book = Book.Open(BookTest.NormalData))
             {
-                var sheet = book["TestSheet1"];
+                var row = book["TestSheet1"][0];
 
-                Assert.That(sheet[index], Is.Not.Null);
-                Assert.That(sheet[index].Index, Is.EqualTo(index));
+                Assert.That(row[index], Is.Not.Null);
+                Assert.That(row[index].Index, Is.EqualTo(index));
             }
         }
 
@@ -41,9 +41,9 @@ namespace Exceader.Test
         {
             using (var book = Book.Open(BookTest.NormalData))
             {
-                var sheet = book["TestSheet1"];
+                var row = book["TestSheet1"][0];
 
-                Assert.That(() => sheet[-1], Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
+                Assert.That(() => row[-1], Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
             }
         }
 

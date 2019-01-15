@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Linq;
+using Exceader.Common;
 
 namespace Exceader.Models
 {
@@ -36,12 +37,9 @@ namespace Exceader.Models
                     throw new ArgumentNullException(nameof(id));
                 }
 
-                if (!CellPosition.TryParse(id, out var pos))
-                {
-                    throw new FormatException();
-                }
+                var (row, column) = ExcelNumber.ToIndexes(id);
 
-                return this[pos.Row][pos.Column];
+                return this[row][column];
             }
         }
 

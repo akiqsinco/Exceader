@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using Exceader.Common;
 
 namespace Exceader.Models
 {
@@ -14,7 +15,7 @@ namespace Exceader.Models
 
         public bool IsEmpty => string.IsNullOrEmpty(Value);
 
-        public string Id => new CellPosition(Row.Index, Index).ToId();
+        public string Id => ExcelNumber.ToId(Row.Index, Index);
 
         internal Cell(IRow row, int index)
         {

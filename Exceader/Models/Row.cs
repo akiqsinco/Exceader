@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Linq;
+using Exceader.Common;
 
 namespace Exceader.Models
 {
@@ -53,9 +54,9 @@ namespace Exceader.Models
 
             foreach (XmlElement c in rowElement.GetElementsByTagName("c"))
             {
-                var pos = CellPosition.Parse(c.GetAttribute("r"));
+                var (_, column) = ExcelNumber.ToIndexes(c.GetAttribute("r"));
 
-                cells[pos.Column] = new Cell(this, pos.Column, c, sharedStrings);
+                cells[column] = new Cell(this, column, c, sharedStrings);
             }
 
             return cells;

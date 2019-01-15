@@ -1,4 +1,5 @@
 ﻿using Exceader.Models;
+using Exceader.Common;
 using NUnit.Framework;
 using System;
 
@@ -47,7 +48,7 @@ namespace Exceader.Test
         [TestCase(10, 10)]
         public void GetCellByValidId(int row, int column)
         {
-            var id = new CellPosition(row, column).ToId();
+            var id = ExcelNumber.ToId(row, column);
 
             using (var book = Book.Open(BookTest.NormalData))
             {

@@ -19,7 +19,7 @@ namespace Exceader.Extensions
                 throw new InvalidOperationException();
             }
 
-            return Enumerable.Range(from, to - from).Select(i => sheet[i]);
+            return Enumerable.Range(from, to - from + 1).Select(i => sheet[i]);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Exceader.Extensions
                 throw new InvalidOperationException();
             }
 
-            return Enumerable.Range(from, to - from).Select(i => row[i]);
+            return Enumerable.Range(from, to - from + 1).Select(i => row[i]);
         }
 
         public static IEnumerable<ICell> Range(this IRow row, string from, string to)
@@ -47,7 +47,7 @@ namespace Exceader.Extensions
                 throw new InvalidOperationException();
             }
 
-            return Enumerable.Range(start, end - start).Select(i => row[i]);
+            return Enumerable.Range(start, end - start + 1).Select(i => row[i]);
         }
     }
 }

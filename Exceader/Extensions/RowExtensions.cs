@@ -17,7 +17,7 @@ namespace Exceader.Extensions
 
             if (to < from)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"'{nameof(from)}' should be less or equal to '{nameof(to)}'");
             }
 
             return Enumerable.Range(from, to - from + 1).Select(i => row[i]);
@@ -44,7 +44,7 @@ namespace Exceader.Extensions
             var end = ExcelNumber.ToNumerical(to);
             if (end < start)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"'{nameof(from)}' should be less or equal to '{nameof(to)}'");
             }
 
             return Enumerable.Range(start, end - start + 1).Select(i => row[i]);

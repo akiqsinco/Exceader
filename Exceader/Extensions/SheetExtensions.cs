@@ -16,7 +16,7 @@ namespace Exceader.Extensions
 
             if (to < from)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"'{nameof(from)}' should be less or equal to '{nameof(to)}'");
             }
 
             return Enumerable.Range(from, to - from + 1).Select(i => sheet[i]);

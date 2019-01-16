@@ -10,7 +10,7 @@ namespace Exceader.Extensions
         {
             if (cell == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cell));
             }
 
             return int.TryParse(cell.Value, out var value) ? value : default(int?);
@@ -20,7 +20,7 @@ namespace Exceader.Extensions
         {
             if (cell == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cell));
             }
 
             return float.TryParse(cell.Value, out var value) ? value : default(float?);
@@ -30,7 +30,7 @@ namespace Exceader.Extensions
         {
             if (cell == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cell));
             }
 
             return double.TryParse(cell.Value, out var value) ? value : default(double?);
@@ -40,7 +40,7 @@ namespace Exceader.Extensions
         {
             if (cell == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cell));
             }
 
             return DateTime.TryParse(cell.Value, provider, DateTimeStyles.None, out var value) ? value : default(DateTime?);
@@ -50,7 +50,7 @@ namespace Exceader.Extensions
         {
             if (cell == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cell));
             }
 
             return DateTime.TryParseExact(cell.Value, format, provider, DateTimeStyles.None, out var value) ? value : default(DateTime?);

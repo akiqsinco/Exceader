@@ -54,26 +54,26 @@ namespace Exceader.Common
             return sb.ToString();
         }
 
-        public static (int row, int column) ToIndexes(string id)
+        public static (int row, int column) ToIndexes(string cellId)
         {
-            if (id == null)
+            if (cellId == null)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentNullException(nameof(cellId));
             }
 
             var row = 0;
             var column = 0;
             var success = true;
-            for (var i = 0; i < id.Length; i++)
+            for (var i = 0; i < cellId.Length; i++)
             {
-                var c = id[i];
+                var c = cellId[i];
                 if ('A' <= c && c <= 'Z')
                 {
                     column = column * 26 + (c - 'A' + 1);
                     continue;
                 }
 
-                success = i > 0 && int.TryParse(id.Substring(i), out row);
+                success = i > 0 && int.TryParse(cellId.Substring(i), out row);
                 break;
             }
             success &= row > 0;
@@ -86,7 +86,7 @@ namespace Exceader.Common
             return (row - 1, column - 1);
         }
 
-        public static string ToId(int row, int column)
+        public static string ToCellId(int row, int column)
         {
             if (row < 0)
             {

@@ -28,16 +28,16 @@ namespace Exceader.Models
             }
         }
 
-        public ICell this[string id]
+        public ICell this[string cellId]
         {
             get
             {
-                if (id == null)
+                if (cellId == null)
                 {
-                    throw new ArgumentNullException(nameof(id));
+                    throw new ArgumentNullException(nameof(cellId));
                 }
 
-                var (row, column) = ExcelNumber.ToIndexes(id);
+                var (row, column) = ExcelNumber.ToIndexes(cellId);
 
                 return this[row][column];
             }

@@ -68,7 +68,7 @@ namespace Exceader.Test
         [TestCase(1048575, 16383, "XFD1048576")]
         public void ConvertToId(int row, int column, string expectedId)
         {
-            var id = ExcelNumber.ToId(row, column);
+            var id = ExcelNumber.ToCellId(row, column);
 
             Assert.That(id, Is.EqualTo(expectedId));
         }
@@ -79,7 +79,7 @@ namespace Exceader.Test
         [TestCase(-1, -1)]
         public void InstanciateWithInvalidIndex(int row, int column)
         {
-            Assert.That(() => ExcelNumber.ToId(row, column), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => ExcelNumber.ToCellId(row, column), Throws.Exception.TypeOf<ArgumentOutOfRangeException>());
         }
     }
 }

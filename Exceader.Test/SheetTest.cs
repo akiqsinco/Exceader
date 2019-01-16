@@ -48,7 +48,7 @@ namespace Exceader.Test
         [TestCase(10, 10)]
         public void GetCellByValidId(int row, int column)
         {
-            var id = ExcelNumber.ToId(row, column);
+            var id = ExcelNumber.ToCellId(row, column);
 
             using (var book = Book.Open(BookTest.NormalData))
             {

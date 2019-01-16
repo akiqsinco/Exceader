@@ -10,9 +10,10 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/akiqsinco/Exceader</RepositoryUrl>
     <PackageTags>excel xlsx</PackageTags>
-    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/mit-license</PackageLicenseUrl>
     <Product>Exceader</Product>
     <Version>1.0.0</Version>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

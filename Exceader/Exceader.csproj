@@ -3,14 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>akiqsinco</Authors>
+    <Title>Exceader</Title>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Lightweight Excel data reader.</Description>
     <Copyright>Copyright ©2019 akiqsinco</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/akiqsinco/Exceader</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/akiqsinco/Exceader</RepositoryUrl>
     <PackageTags>excel xlsx</PackageTags>
-    <PackageLicenseUrl>https://opensource.org/licenses/mit-license</PackageLicenseUrl>
     <Product>Exceader</Product>
     <Version>1.0.0</Version>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
